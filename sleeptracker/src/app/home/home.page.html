@@ -1,20 +1,144 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Sleep Tracker</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="page">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <!-- ===== Overnight Sleep ===== -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Log Overnight Sleep</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Night of (date only) -->
+        <ion-item lines="full">
+          <ion-label>Night of</ion-label>
+          <ion-datetime-button slot="end" datetime="nightOfPicker"></ion-datetime-button>
+        </ion-item>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="nightOfPicker"
+              presentation="date"
+              [(ngModel)]="nightOfISO">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+        <!-- Bedtime (time only) -->
+        <ion-item lines="full">
+          <ion-label>Went to bed</ion-label>
+          <ion-datetime-button slot="end" datetime="bedtimePicker"></ion-datetime-button>
+        </ion-item>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="bedtimePicker"
+              presentation="time"
+              [(ngModel)]="bedTimeISO">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+        <!-- Wake time (time only) -->
+        <ion-item lines="full">
+          <ion-label>Woke up</ion-label>
+          <ion-datetime-button slot="end" datetime="wakePicker"></ion-datetime-button>
+        </ion-item>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="wakePicker"
+              presentation="time"
+              [(ngModel)]="wakeTimeISO">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+        <ion-button expand="block" (click)="addOvernightSleepFromTimes()">
+          Save Overnight Sleep
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <h2>Overnight Logs</h2>
+    <div class="log-scroll">
+      <ion-list>
+        <ion-item *ngFor="let s of allOvernightData">
+          <ion-label>
+            <h3>{{ s.dateString() }}</h3>
+            <p>{{ s.summaryString() }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- ===== Sleepiness ===== -->
+    <h2>Sleepiness</h2>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Log Sleepiness</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Sleepiness value -->
+        <ion-item lines="full">
+          <ion-label>How sleepy are you?</ion-label>
+          <ion-select slot="end" [(ngModel)]="sleepinessValue" interface="popover">
+            <ion-select-option *ngFor="let v of [1,2,3,4,5,6,7]" [value]="v">
+              {{ v }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Guide / explanation -->
+        <ion-item lines="none" class="sleepiness-guide">
+          <ion-label class="ion-text-wrap">
+            <div class="guide-number">{{ sleepinessValue }}</div>
+            <div class="guide-text">{{ sleepinessDescription }}</div>
+          </ion-label>
+        </ion-item>
+
+        <!-- Time -->
+        <ion-item lines="full">
+          <ion-label>Time</ion-label>
+          <ion-datetime-button slot="end" datetime="sleepyTimePicker"></ion-datetime-button>
+        </ion-item>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="sleepyTimePicker"
+              presentation="date-time"
+              [(ngModel)]="sleepinessTimeISO">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+        <ion-button expand="block" (click)="addSleepinessLog()">
+          Save Sleepiness
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="log-scroll">
+      <ion-list>
+        <ion-item *ngFor="let s of allSleepinessData">
+          <ion-label>
+            <h3>{{ s.dateString() }}</h3>
+            <p>{{ s.summaryString() }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
   </div>
 </ion-content>

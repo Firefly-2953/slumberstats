@@ -1,0 +1,20 @@
+<ion-tabs>
+  <router-outlet></router-outlet>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="sleep" [routerLink]="['/tabs/sleep']">
+      <ion-icon name="moon"></ion-icon>
+      <ion-label>Sleep</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="sleepiness" [routerLink]="['/tabs/sleepiness']">
+      <ion-icon name="bed"></ion-icon>
+      <ion-label>Sleepiness</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="logs" [routerLink]="['/tabs/logs']">
+      <ion-icon name="stats-chart"></ion-icon>
+      <ion-label>Logs</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
