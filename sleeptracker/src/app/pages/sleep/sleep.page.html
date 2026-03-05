@@ -1,78 +1,84 @@
+<div class="sleep-page">
 
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Sleep</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-title>SlumberStats</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="page">
+  <ion-content class="ion-padding sleep-bg">
+    <div class="page">
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Log Overnight Sleep</ion-card-title>
-      </ion-card-header>
+      <ion-card class="glass-card">
+        <ion-card-header>
+          <ion-card-title>Log Overnight Sleep</ion-card-title>
+        </ion-card-header>
 
-      <ion-card-content>
+        <ion-card-content>
 
-        <!-- Night of (date only) -->
-        <ion-item lines="full">
-          <ion-label>Night of</ion-label>
-          <ion-button id="open-night" fill="clear" slot="end">
-            {{ formatNight(nightOfISO) }}
+          <!-- Night of (date only) -->
+          <ion-item lines="full">
+            <ion-label>Night of</ion-label>
+            <ion-button id="open-night" fill="clear" slot="end">
+              {{ formatNight(nightOfISO) }}
+            </ion-button>
+          </ion-item>
+
+          <ion-modal trigger="open-night" [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                presentation="date"
+                showDefaultButtons="true"
+                [(ngModel)]="nightOfISO">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+
+          <!-- Bedtime -->
+          <ion-item lines="full">
+            <ion-label>Went to bed</ion-label>
+            <ion-button id="open-bed" fill="clear" slot="end">
+              {{ formatTime(bedTimeISO) }}
+            </ion-button>
+          </ion-item>
+
+          <ion-modal trigger="open-bed" [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                presentation="time"
+                showDefaultButtons="true"
+                [(ngModel)]="bedTimeISO">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+
+          <!-- Wake time -->
+          <ion-item lines="full">
+            <ion-label>Woke up</ion-label>
+            <ion-button id="open-wake" fill="clear" slot="end">
+              {{ formatTime(wakeTimeISO) }}
+            </ion-button>
+          </ion-item>
+
+          <ion-modal trigger="open-wake" [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                presentation="time"
+                showDefaultButtons="true"
+                [(ngModel)]="wakeTimeISO">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+
+          <ion-button expand="block" (click)="addOvernightSleepFromTimes()">
+            Save Overnight Sleep
           </ion-button>
-        </ion-item>
 
-        <ion-modal trigger="open-night" [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              presentation="date"
-              [(ngModel)]="nightOfISO">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
+        </ion-card-content>
+      </ion-card>
 
-        <!-- Bedtime (time only) -->
-        <ion-item lines="full">
-          <ion-label>Went to bed</ion-label>
-          <ion-button id="open-bed" fill="clear" slot="end">
-            {{ formatTime(bedTimeISO) }}
-          </ion-button>
-        </ion-item>
+    </div>
+  </ion-content>
 
-        <ion-modal trigger="open-bed" [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              presentation="time"
-              [(ngModel)]="bedTimeISO">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
-
-        <!-- Wake time (time only) -->
-        <ion-item lines="full">
-          <ion-label>Woke up</ion-label>
-          <ion-button id="open-wake" fill="clear" slot="end">
-            {{ formatTime(wakeTimeISO) }}
-          </ion-button>
-        </ion-item>
-
-        <ion-modal trigger="open-wake" [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              presentation="time"
-              [(ngModel)]="wakeTimeISO">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
-
-        <ion-button expand="block" (click)="addOvernightSleepFromTimes()">
-          Save Overnight Sleep
-        </ion-button>
-
-      </ion-card-content>
-    </ion-card>
-
-  </div>
-</ion-content>
+</div>
 

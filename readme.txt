@@ -12,7 +12,9 @@
 - */1 A readme and demo video which explains how these features were implemented and their design rationale
 
 2. How long, in hours, did it take you to complete this assignment?
-
+ 5 hours - getting code working on home page
+ 2 hours - spliting it up within pages and getting routerlink to actually let me click things
+ 
 
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)

@@ -35,3 +35,25 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+/* tab bar to glass */
+ion-tab-bar.glass-tabbar {
+  --background: transparent;
+  --border: transparent;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+ion-tab-bar.glass-tabbar ion-icon {
+  font-size: 26px;
+}
+
+ion-content {
+  --padding-bottom: 90px; 
+}
+
+.glass-tab ion-icon {
+  color: #fcfafa;
+}

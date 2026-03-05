@@ -23,7 +23,7 @@ export const routes: Routes = [
     ],
   },
 
-  // keep home temporarily if you want (optional)
+  // home for backup and testing, not linked in the app
   {
     path: 'home',
     loadComponent: () => import('./home/home.page').then(m => m.HomePage),

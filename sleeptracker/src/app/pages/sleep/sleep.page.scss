@@ -1,0 +1,57 @@
+.sleep-page {
+  background-image: url('/assets/background/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+ion-content.sleep-bg {
+  --background: transparent;
+  background: url('/assets/background/bg.jpg') center/cover no-repeat;
+}
+
+ion-header {
+  background: transparent !important;
+}
+
+ion-toolbar {
+  --background: transparent !important;
+  --border-color: transparent !important;
+}
+
+ion-title {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.glass-card ion-item {
+  --background: transparent;
+  --color: #111;
+}
+
+.glass-card ion-card-title {
+  color: #444343;
+}
+
+ion-modal {
+  --height: auto;
+  --width: 90%;
+  --max-width: 400px;
+  --border-radius: 16px;
+}
+
+ion-title {
+  font-family: "Story Script", cursive;
+  font-size: 1.9rem;
+  letter-spacing: 0.5px;
+  color: #184221;
+}

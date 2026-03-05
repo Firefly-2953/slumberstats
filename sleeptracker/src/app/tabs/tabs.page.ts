@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+
 import {
   IonTabs,
   IonTabBar,
   IonTabButton,
-  IonRouterOutlet,
-  IonLabel,
   IonIcon
 } from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { moonOutline, cloudOutline, listOutline } from 'ionicons/icons';
+
+/* icons for tabs */
+addIcons({
+  moonOutline,
+  cloudOutline,
+  listOutline
+});
 
 @Component({
   selector: 'app-tabs',
@@ -19,8 +28,6 @@ import {
     IonTabs,
     IonTabBar,
     IonTabButton,
-    IonRouterOutlet,
-    IonLabel,
     IonIcon
   ],
 })

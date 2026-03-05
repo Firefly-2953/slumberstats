@@ -1,37 +1,29 @@
-
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Logs</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="page">
+<ion-content [fullscreen]="true" scrollY="true" class="ion-padding">
 
-    <h2>Overnight Logs</h2>
-    <div class="log-scroll">
-      <ion-list>
-        <ion-item *ngFor="let s of allOvernightData">
-          <ion-label>
-            <h3>{{ s.dateString() }}</h3>
-            <p>{{ s.summaryString() }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
+  <h2>Overnight Logs</h2>
+  <ion-list>
+    <ion-item *ngFor="let s of allOvernightData">
+      <ion-label>
+        <h3>{{ s.dateString() }}</h3>
+        <p>{{ s.summaryString() }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-    <h2>Sleepiness Logs</h2>
-    <div class="log-scroll">
-      <ion-list>
-        <ion-item *ngFor="let s of allSleepinessData">
-          <ion-label>
-            <h3>{{ s.dateString() }}</h3>
-            <p>{{ s.summaryString() }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
+  <h2>Sleepiness Logs</h2>
+  <ion-list>
+    <ion-item *ngFor="let s of allSleepinessData">
+      <ion-label>
+        <h3>{{ s.dateString() }}</h3>
+        <p>{{ s.summaryString() }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-  </div>
 </ion-content>
-

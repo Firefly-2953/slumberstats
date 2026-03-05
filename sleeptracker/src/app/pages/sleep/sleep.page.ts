@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 import {
   IonHeader, IonToolbar, IonTitle, IonContent,
@@ -29,9 +30,9 @@ import { OvernightSleepData } from '../../data/overnight-sleep-data';
 ],
 })
 export class SleepPage {
-  constructor(public sleepService: SleepService) {}
+  constructor(public sleepService: SleepService, private alertCtrl: AlertController) {}
 
-  // Defaults to yesterday
+  // Defaults to yesterday for easy input
   nightOfISO: string = (() => {
     const d = new Date();
     d.setDate(d.getDate() - 1);
@@ -41,27 +42,52 @@ export class SleepPage {
   bedTimeISO: string = new Date().toISOString();
   wakeTimeISO: string = new Date().toISOString();
 
-  addOvernightSleepFromTimes() {
-    const night = new Date(this.nightOfISO);
-    const bed = new Date(this.bedTimeISO);
-    const wake = new Date(this.wakeTimeISO);
+  //set time
+  async addOvernightSleepFromTimes() {
+  const night = new Date(this.nightOfISO);
+  const bed = new Date(this.bedTimeISO);
+  const wake = new Date(this.wakeTimeISO);
 
-    // Start = nightOf date + bedtime time
-    const start = new Date(night);
-    start.setHours(bed.getHours(), bed.getMinutes(), 0, 0);
+  const start = new Date(night);
+  start.setHours(bed.getHours(), bed.getMinutes(), 0, 0);
 
-    // End = nightOf date + wake time (if it's <= start, bump to next day)
-    const end = new Date(night);
-    end.setHours(wake.getHours(), wake.getMinutes(), 0, 0);
-    if (end <= start) end.setDate(end.getDate() + 1);
+  const end = new Date(night);
+  end.setHours(wake.getHours(), wake.getMinutes(), 0, 0);
+  if (end <= start) end.setDate(end.getDate() + 1);
 
-    if (end <= start) {
-      alert('Wake time must be after bedtime.');
-      return;
-    }
+  if (end <= start) {
+  const errorAlert = await this.alertCtrl.create({
+    header: 'Invalid Time',
+    message: 'Wake time must be after bedtime.',
+    buttons: ['OK']
+  });
 
-    this.sleepService.logOvernightData(new OvernightSleepData(start, end));
-  }
+  await errorAlert.present();
+  return;
+}
+
+  const duration = this.durationString(start, end);
+
+  //notification pop up to confirm sleep log, edit cancels and doesnt log
+  const alert = await this.alertCtrl.create({
+    header: 'Confirm sleep log',
+    message: `You slept ${duration}. Is that correct?`,
+    buttons: [
+      {
+        text: 'Edit',
+        role: 'cancel'
+      },
+      {
+        text: 'Save',
+        handler: () => {
+          this.sleepService.logOvernightData(new OvernightSleepData(start, end));
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}
 
   formatNight(iso: string): string {
   const d = new Date(iso);
@@ -69,7 +95,7 @@ export class SleepPage {
 }
 
 formatTime(value: string): string {
-  // If value is "HH:mm" (time-only), format it nicely
+  // format time
   if (/^\d{2}:\d{2}$/.test(value)) {
     const [hh, mm] = value.split(':').map(Number);
     const d = new Date();
@@ -77,9 +103,16 @@ formatTime(value: string): string {
     return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
   }
 
-  // Otherwise parse as date/time
+  //return pick if not valid time for the buttons, otherwise show the time
   const d = new Date(value);
   if (isNaN(d.getTime())) return 'Pick';
   return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 }
+  //format for hours and mins
+  private durationString(start: Date, end: Date): string {
+    const diffMin = Math.round((end.getTime() - start.getTime()) / 60000);
+    const h = Math.floor(diffMin / 60);
+    const m = diffMin % 60;
+    return `${h} hour${h === 1 ? '' : 's'}${m ? `, ${m} minute${m === 1 ? '' : 's'}` : ''}`;
+  }
 }
