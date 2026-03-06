@@ -12,8 +12,15 @@
 - */1 A readme and demo video which explains how these features were implemented and their design rationale
 
 2. How long, in hours, did it take you to complete this assignment?
+    TOTAL = 23 hours
+
  5 hours - getting code working on home page
  2 hours - spliting it up within pages and getting routerlink to actually let me click things
+ 2 hours - getting background and headers on all tabs + tab bar working
+ 5 hours - getting sleep set up (endless amount of bugs)
+ 2 hours - sleepiness
+ 5 hours - logs, researching how to implement all the stuff i wanted to do
+ 2 hours - readme and finishing touches
  
 
 
