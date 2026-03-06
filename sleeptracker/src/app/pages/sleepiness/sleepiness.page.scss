@@ -27,7 +27,6 @@ ion-title {
   color: #184221;
 }
 
-/* Glass card */
 .glass-card {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(8px);
@@ -54,7 +53,6 @@ ion-title {
   --border-radius: 14px;
 }
 
-/* Sleepiness buttons */
 .sleepiness-row {
   margin-bottom: 8px;
 }
@@ -89,13 +87,18 @@ ion-title {
   transform: scale(0.96);
 }
 
-/* Modal styling */
 ion-modal {
   --height: auto;
   --width: 90%;
   --max-width: 400px;
   --border-radius: 16px;
    --background: #1e1e1e;
+}
+
+.sleepiness-save-btn {
+  --background: #184221;
+  --color: white;
+  --border-radius: 14px;
 }
 
 /* for fixing the weird shadow line for times */

@@ -3,23 +3,23 @@
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
 */10
-- */1 The ability to log overnight sleep
-- */1 The ability to log sleepiness during the day
-- */1 The ability to view these two categories of logged data
-- */2 Either using a native device resource or backing up logged data
-- */2 Following good principles of mobile design
-- */2 Creating a compelling app
-- */1 A readme and demo video which explains how these features were implemented and their design rationale
+- 1/1 The ability to log overnight sleep
+- 1/1 The ability to log sleepiness during the day
+- 1/1 The ability to view these two categories of logged data
+- 2/2 Either using a native device resource or backing up logged data
+- 2/2 Following good principles of mobile design
+- 2/2 Creating a compelling app
+- 1/1 A readme and demo video which explains how these features were implemented and their design rationale
 
 2. How long, in hours, did it take you to complete this assignment?
-    TOTAL = 23 hours
+    TOTAL = 25 hours
 
  5 hours - getting code working on home page
  2 hours - spliting it up within pages and getting routerlink to actually let me click things
  2 hours - getting background and headers on all tabs + tab bar working
  5 hours - getting sleep set up (endless amount of bugs)
  2 hours - sleepiness
- 5 hours - logs, researching how to implement all the stuff i wanted to do
+ 7 hours - logs, researching how to implement all the stuff i wanted to do (graphs)
  2 hours - readme and finishing touches
  
 

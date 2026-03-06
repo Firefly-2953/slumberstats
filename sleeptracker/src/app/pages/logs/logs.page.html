@@ -7,7 +7,6 @@
   </ion-header>
 
   <ion-content class="ion-padding sleep-bg">
-
     <div class="page">
 
       <!-- Sleep Stats -->
@@ -36,55 +35,102 @@
         </ion-card-content>
       </ion-card>
 
-      <!-- Overnight Logs -->
+      <!-- Sleep Chart -->
       <ion-card class="glass-card">
         <ion-card-header>
-          <ion-card-title>Overnight Logs</ion-card-title>
+          <ion-card-title>Weekly Sleep Duration</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-          <ion-list>
-            <ion-item-sliding *ngFor="let s of allOvernightData; let i = index" #slidingItem>
-              <ion-item>
-                <ion-label>
-                  <h3>{{ s.dateString() }}</h3>
-                  <p>{{ s.summaryString() }}</p>
-                </ion-label>
-              </ion-item>
+          <div class="chart-container" *ngIf="allOvernightData.length > 0; else noSleepChartData">
+            <canvas #sleepChartCanvas></canvas>
+          </div>
 
-              <ion-item-options side="end">
-                <ion-item-option color="danger" (click)="confirmDeleteOvernight(s, slidingItem)">
-                  Delete
-                </ion-item-option>
-              </ion-item-options>
-            </ion-item-sliding>
-          </ion-list>
+          <ng-template #noSleepChartData>
+            <p>No overnight sleep data yet.</p>
+          </ng-template>
         </ion-card-content>
       </ion-card>
 
-      <!-- Sleepiness Logs -->
+      <!-- Sleepiness Chart -->
       <ion-card class="glass-card">
         <ion-card-header>
-          <ion-card-title>Sleepiness Logs</ion-card-title>
+          <ion-card-title>Sleepiness Trend</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-          <ion-list>
-            <ion-item-sliding *ngFor="let s of allSleepinessData; let i = index" #slidingItem>
-              <ion-item>
-                <ion-label>
-                  <h3>{{ s.dateString() }}</h3>
-                  <p>{{ s.summaryString() }}</p>
-                </ion-label>
+          <p *ngIf="sleepinessChartDateLabel" class="chart-subtitle">
+            {{ sleepinessChartDateLabel }}
+          </p>
+
+          <div class="chart-container" *ngIf="hasSleepinessChartData; else noSleepinessChartData">
+            <canvas #sleepinessChartCanvas></canvas>
+          </div>
+
+          <ng-template #noSleepinessChartData>
+            <p>No sleepiness data yet.</p>
+          </ng-template>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Collapsible Logs -->
+      <ion-card class="glass-card">
+        <ion-card-content>
+          <ion-accordion-group>
+
+            <!-- Overnight Logs -->
+            <ion-accordion value="overnight">
+              <ion-item slot="header" lines="none">
+                <ion-label>Overnight Logs ({{ allOvernightData.length }})</ion-label>
               </ion-item>
 
-              <ion-item-options side="end">
-                <ion-item-option color="danger" (click)="confirmDeleteSleepiness(s, slidingItem)">
-                  Delete
-                </ion-item-option>
-              </ion-item-options>
-            </ion-item-sliding>
-          </ion-list>
+              <div slot="content">
+                <ion-list>
+                  <ion-item-sliding *ngFor="let s of allOvernightData" #slidingItem>
+                    <ion-item>
+                      <ion-label>
+                        <h3>{{ s.dateString() }}</h3>
+                        <p>{{ s.summaryString() }}</p>
+                      </ion-label>
+                    </ion-item>
+
+                    <ion-item-options side="end">
+                      <ion-item-option color="danger" (click)="confirmDeleteOvernight(s, slidingItem)">
+                        Delete
+                      </ion-item-option>
+                    </ion-item-options>
+                  </ion-item-sliding>
+                </ion-list>
+              </div>
+            </ion-accordion>
+
+            <!-- Sleepiness Logs -->
+            <ion-accordion value="sleepiness">
+              <ion-item slot="header" lines="none">
+                <ion-label>Sleepiness Logs ({{ allSleepinessData.length }})</ion-label>
+              </ion-item>
+
+              <div slot="content">
+                <ion-list>
+                  <ion-item-sliding *ngFor="let s of allSleepinessData" #slidingItem>
+                    <ion-item>
+                      <ion-label>
+                        <h3>{{ s.dateString() }}</h3>
+                        <p>{{ s.summaryString() }}</p>
+                      </ion-label>
+                    </ion-item>
+
+                    <ion-item-options side="end">
+                      <ion-item-option color="danger" (click)="confirmDeleteSleepiness(s, slidingItem)">
+                        Delete
+                      </ion-item-option>
+                    </ion-item-options>
+                  </ion-item-sliding>
+                </ion-list>
+              </div>
+            </ion-accordion>
+
+          </ion-accordion-group>
         </ion-card-content>
       </ion-card>
 
@@ -94,7 +140,6 @@
       </ion-button>
 
     </div>
-
   </ion-content>
 
 </div>

@@ -20,19 +20,18 @@ import { OvernightSleepData } from '../../data/overnight-sleep-data';
   styleUrls: ['sleep.page.scss'],
   standalone: true,
   imports: [
-  CommonModule,
-  FormsModule,
-  IonHeader, IonToolbar, IonTitle, IonContent,
-  IonItem, IonLabel,
-  IonButton,
-  IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-  IonModal, IonDatetime,
-],
+    CommonModule,
+    FormsModule,
+    IonHeader, IonToolbar, IonTitle, IonContent,
+    IonItem, IonLabel,
+    IonButton,
+    IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+    IonModal, IonDatetime,
+  ],
 })
 export class SleepPage {
   constructor(public sleepService: SleepService, private alertCtrl: AlertController) {}
 
-  // Defaults to yesterday for easy input
   nightOfISO: string = (() => {
     const d = new Date();
     d.setDate(d.getDate() - 1);
@@ -42,78 +41,87 @@ export class SleepPage {
   bedTimeISO: string = (() => {
     const d = new Date();
     d.setHours(d.getHours() - 8);
-      return d.toISOString();
+    return d.toISOString();
   })();
 
   wakeTimeISO: string = new Date().toISOString();
 
-  //set time
   async addOvernightSleepFromTimes() {
-  const night = new Date(this.nightOfISO);
-  const bed = new Date(this.bedTimeISO);
-  const wake = new Date(this.wakeTimeISO);
+    const night = new Date(this.nightOfISO);
+    const bed = new Date(this.bedTimeISO);
+    const wake = new Date(this.wakeTimeISO);
 
-  const start = new Date(night);
-  start.setHours(bed.getHours(), bed.getMinutes(), 0, 0);
+    const start = new Date(night);
+    start.setHours(bed.getHours(), bed.getMinutes(), 0, 0);
 
-  const end = new Date(night);
-  end.setHours(wake.getHours(), wake.getMinutes(), 0, 0);
-  if (end <= start) end.setDate(end.getDate() + 1);
+    const end = new Date(night);
+    end.setHours(wake.getHours(), wake.getMinutes(), 0, 0);
+    if (end <= start) end.setDate(end.getDate() + 1);
 
-  if (end <= start) {
-  const errorAlert = await this.alertCtrl.create({
-    header: 'Invalid Time',
-    message: 'Wake time must be after bedtime.',
-    buttons: ['OK']
-  });
+    if (end <= start) {
+      const errorAlert = await this.alertCtrl.create({
+        header: 'Invalid Time',
+        message: 'Wake time must be after bedtime.',
+        buttons: ['OK']
+      });
 
-  await errorAlert.present();
-  return;
-}
+      await errorAlert.present();
+      return;
+    }
 
-  const duration = this.durationString(start, end);
+    const now = new Date();
 
-  //notification pop up to confirm sleep log, edit cancels and doesnt log
-  const alert = await this.alertCtrl.create({
-    header: 'Confirm sleep log',
-    message: `You slept ${duration}. Is that correct?`,
-    buttons: [
-      {
-        text: 'Edit',
-        role: 'cancel'
-      },
-      {
-        text: 'Save',
-        handler: () => {
-          this.sleepService.logOvernightData(new OvernightSleepData(start, end));
+    if (start > now || end > now) {
+      const futureAlert = await this.alertCtrl.create({
+        header: 'Future Entry Not Allowed',
+        message: 'Sleep logs cannot be entered in the future.',
+        buttons: ['OK']
+      });
+
+      await futureAlert.present();
+      return;
+    }
+
+    const duration = this.durationString(start, end);
+
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm sleep log',
+      message: `You slept ${duration}. Is that correct?`,
+      buttons: [
+        {
+          text: 'Edit',
+          role: 'cancel'
+        },
+        {
+          text: 'Save',
+          handler: () => {
+            this.sleepService.logOvernightData(new OvernightSleepData(start, end));
+          }
         }
-      }
-    ]
-  });
+      ]
+    });
 
-  await alert.present();
-}
+    await alert.present();
+  }
 
   formatNight(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-}
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+  }
 
-formatTime(value: string): string {
-  // format time
-  if (/^\d{2}:\d{2}$/.test(value)) {
-    const [hh, mm] = value.split(':').map(Number);
-    const d = new Date();
-    d.setHours(hh, mm, 0, 0);
+  formatTime(value: string): string {
+    if (/^\d{2}:\d{2}$/.test(value)) {
+      const [hh, mm] = value.split(':').map(Number);
+      const d = new Date();
+      d.setHours(hh, mm, 0, 0);
+      return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    }
+
+    const d = new Date(value);
+    if (isNaN(d.getTime())) return 'Pick';
     return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
   }
 
-  //return pick if not valid time for the buttons, otherwise show the time
-  const d = new Date(value);
-  if (isNaN(d.getTime())) return 'Pick';
-  return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-}
-  //format for hours and mins
   private durationString(start: Date, end: Date): string {
     const diffMin = Math.round((end.getTime() - start.getTime()) / 60000);
     const h = Math.floor(diffMin / 60);
@@ -122,35 +130,35 @@ formatTime(value: string): string {
   }
 
   get lastOvernightEntry(): OvernightSleepData | null {
-  const data = SleepService.AllOvernightData;
-  if (!data || data.length === 0) return null;
-  return data[data.length - 1];
-}
-
-get lastNightSummary() {
-  const entry = this.lastOvernightEntry;
-  if (!entry) return null;
-
-  const start = entry.getSleepStart();
-  const end = entry.getSleepEnd();
-
-  return {
-    date: entry.dateString(),
-    duration: entry.summaryString(),
-    bedtime: start.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
-    wakeTime: end.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
-  };
-}
-
-get greeting(): string {
-  const hour = new Date().getHours();
-
-  if (hour < 12) {
-    return "Good morning, Emily ☀️";
-  } else if (hour < 18) {
-    return "Good afternoon, Emily 🌤️";
-  } else {
-    return "Good evening, Emily 🌙";
+    const data = SleepService.AllOvernightData;
+    if (!data || data.length === 0) return null;
+    return data[data.length - 1];
   }
-}
+
+  get lastNightSummary() {
+    const entry = this.lastOvernightEntry;
+    if (!entry) return null;
+
+    const start = entry.getSleepStart();
+    const end = entry.getSleepEnd();
+
+    return {
+      date: entry.dateString(),
+      duration: entry.summaryString(),
+      bedtime: start.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+      wakeTime: end.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+    };
+  }
+
+  get greeting(): string {
+    const hour = new Date().getHours();
+
+    if (hour < 12) {
+      return 'Good morning, Emily ☀️';
+    } else if (hour < 18) {
+      return 'Good afternoon, Emily 🌤️';
+    } else {
+      return 'Good evening, Emily 🌙';
+    }
+  }
 }

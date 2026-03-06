@@ -76,7 +76,6 @@ ion-item {
   padding: 10px;
 }
 
-/* FIX: time was on seperate lines */
 .stat-number {
   font-size: 1.6rem;
   font-weight: 600;
@@ -115,4 +114,55 @@ ion-list {
   margin-top: 8px;
   margin-bottom: 20px;
   --border-radius: 14px;
+}
+
+ion-accordion-group,
+ion-accordion {
+  background: transparent !important;
+}
+
+ion-accordion ion-item[slot="header"] {
+  --background: transparent;
+  --color: #111;
+  --border-color: rgba(0, 0, 0, 0.12);
+  font-weight: 600;
+}
+
+ion-accordion [slot="content"] {
+  background: transparent !important;
+}
+
+ion-accordion ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+ion-accordion ion-item {
+  --background: transparent;
+  --color: #111;
+  --border-color: rgba(0, 0, 0, 0.12);
+}
+
+ion-accordion ion-item[slot="header"] {
+  border-radius: 12px;
+  margin-bottom: 6px;
+}
+
+.chart-container {
+  position: relative;
+  height: 260px;
+  width: 100%;
+}
+
+.chart-container {
+  position: relative;
+  height: 260px;
+  width: 100%;
+}
+
+.chart-subtitle {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #333;
+  font-size: 0.95rem;
 }

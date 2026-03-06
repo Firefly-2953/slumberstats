@@ -18,6 +18,12 @@ ion-header {
 ion-toolbar {
   --background: transparent !important;
   --border-color: transparent !important;
+  background: transparent !important;
+}
+
+ion-header::part(background),
+ion-toolbar::part(background) {
+  background: transparent !important;
 }
 
 ion-title {
@@ -28,7 +34,6 @@ ion-title {
   font-weight: 600;
 }
 
-/* Both cards use this */
 .glass-card {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(8px);
@@ -78,6 +83,17 @@ ion-datetime {
   --wheel-highlight-border-radius: 12px;
 }
 
+.sleep-save-btn {
+  --background: #184221;
+  --color: white;
+  --border-radius: 14px;
+}
+
+.glass-card ion-button[fill="clear"] {
+  --color: #184221;
+  font-weight: 600;
+}
+
 ion-datetime::part(wheel-item active) {
   color: white;
   font-weight: 600;
@@ -88,7 +104,7 @@ ion-datetime::part(wheel-item) {
 }
 
 .welcome-card {
-  background: rgba(255, 255, 255, 0.35); /* more transparent than the other cards */
+  background: rgba(255, 255, 255, 0.35); 
   backdrop-filter: blur(6px);
   border-radius: 18px;
   margin-bottom: 16px;
