@@ -57,3 +57,18 @@ ion-content {
 .glass-tab ion-icon {
   color: #fcfafa;
 }
+/* trying to overide what was causing a big white header */
+ion-title {
+  text-align: center;
+}
+
+ion-header {
+  background: transparent !important;
+}
+
+ion-toolbar {
+  --background: transparent !important;
+  --border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}

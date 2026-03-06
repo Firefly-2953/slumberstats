@@ -7,35 +7,37 @@
 
   <ion-content class="ion-padding sleep-bg">
     <div class="page">
+
+      <!-- Log Sleepiness -->
       <ion-card class="glass-card">
         <ion-card-header>
           <ion-card-title>Log Sleepiness</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-          <!-- Sleepiness value -->
-          <ion-item lines="full">
+          <ion-item lines="none" class="sleepiness-row">
             <ion-label>How sleepy are you?</ion-label>
-            <ion-select slot="end" [(ngModel)]="sleepinessValue" interface="popover">
-              <ion-select-option *ngFor="let v of [1,2,3,4,5,6,7]" [value]="v">
-                {{ v }}
-              </ion-select-option>
-            </ion-select>
           </ion-item>
 
-          <!-- Guide / explanation -->
-          <ion-item lines="none" class="sleepiness-guide">
-            <ion-label class="ion-text-wrap">
-              <div class="guide-number">{{ sleepinessValue }}</div>
-              <div class="guide-text">{{ sleepinessDescription }}</div>
-            </ion-label>
-          </ion-item>
+          <div class="sleepiness-scale">
+            <button
+              type="button"
+              class="sleepiness-pill"
+              *ngFor="let v of [1,2,3,4,5,6,7]"
+              [class.selected]="sleepinessValue === v"
+              (click)="sleepinessValue = v">
+              {{ v }}
+            </button>
+          </div>
 
-          <!-- Time -->
+          <div class="sleepiness-selected">
+            {{ selectedSleepinessDescription }}
+          </div>
+
           <ion-item lines="full">
             <ion-label>Time</ion-label>
             <ion-button id="open-sleepy-time" fill="clear" slot="end">
-              Pick
+              {{ formatDateTime(sleepinessTimeISO) }}
             </ion-button>
           </ion-item>
 
@@ -54,6 +56,29 @@
           </ion-button>
         </ion-card-content>
       </ion-card>
+
+      <!-- Last Check-In -->
+      <ion-card class="glass-card" *ngIf="lastSleepinessEntry">
+        <ion-card-header>
+          <ion-card-title>Last Check-In</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-label>
+              <h2>Level {{ lastSleepinessEntry.getLoggedValue() }}</h2>
+              <p>{{ timeAgo(lastSleepinessEntry.loggedAt) }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>
+              {{ lastSleepinessDescription }}
+            </ion-label>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
     </div>
   </ion-content>
 </div>

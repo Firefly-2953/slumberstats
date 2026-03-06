@@ -26,3 +26,96 @@ ion-title {
   letter-spacing: 0.5px;
   color: #184221;
 }
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.glass-card ion-item {
+  --background: transparent;
+  --color: #111;
+  --border-color: rgba(0, 0, 0, 0.12);
+}
+
+.glass-card ion-card-title {
+  color: #444343;
+}
+
+.glass-card ion-button[fill="clear"] {
+  --color: #111;
+}
+
+.glass-card ion-button {
+  margin-top: 12px;
+  --border-radius: 14px;
+}
+
+/* Sleepiness buttons */
+.sleepiness-row {
+  margin-bottom: 8px;
+}
+
+.sleepiness-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 10px 0 18px;
+  flex-wrap: nowrap;
+}
+
+.sleepiness-pill {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.45);
+  color: #111;
+  font-size: 1rem;
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.sleepiness-pill.selected {
+  background: rgba(24, 66, 33, 0.85);
+  color: white;
+}
+
+.sleepiness-pill:active {
+  transform: scale(0.96);
+}
+
+/* Modal styling */
+ion-modal {
+  --height: auto;
+  --width: 90%;
+  --max-width: 400px;
+  --border-radius: 16px;
+   --background: #1e1e1e;
+}
+
+/* for fixing the weird shadow line for times */
+ion-datetime {
+  background: #1e1e1e !important;
+}
+
+.sleepiness-selected {
+  text-align: center;
+  margin: 10px 0 18px;
+}
+
+.selected-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #184221;
+}
+
+.selected-description {
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 4px;
+}

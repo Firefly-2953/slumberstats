@@ -63,3 +63,56 @@ ion-list {
 ion-item {
   --inner-padding-end: 0;
 }
+
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  gap: 16px;
+}
+
+.stat-box {
+  flex: 1;
+  padding: 10px;
+}
+
+/* FIX: time was on seperate lines */
+.stat-number {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #184221;
+  white-space: nowrap;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #333;  
+  margin-top: 4px;
+}
+
+.clear-all-btn {
+  margin-top: 8px;
+  --border-radius: 14px;
+}
+
+ion-item-sliding {
+  background: transparent;
+}
+
+ion-item-option {
+  font-weight: 600;
+}
+
+ion-list {
+  background: transparent;
+}
+
+.page {
+  padding-bottom: 110px;
+}
+
+.clear-all-btn {
+  margin-top: 8px;
+  margin-bottom: 20px;
+  --border-radius: 14px;
+}

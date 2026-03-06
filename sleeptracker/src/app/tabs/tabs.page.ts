@@ -9,12 +9,12 @@ import {
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
-import { moonOutline, cloudOutline, listOutline } from 'ionicons/icons';
+import { moonOutline, bedOutline, listOutline } from 'ionicons/icons';
 
 /* icons for tabs */
 addIcons({
   moonOutline,
-  cloudOutline,
+  bedOutline,
   listOutline
 });
 

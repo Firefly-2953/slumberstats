@@ -1,4 +1,5 @@
 <div class="sleep-page">
+
   <ion-header translucent="true">
     <ion-toolbar>
       <ion-title>SlumberStats</ion-title>
@@ -6,8 +7,36 @@
   </ion-header>
 
   <ion-content class="ion-padding sleep-bg">
+
     <div class="page">
 
+      <!-- Sleep Stats -->
+      <ion-card class="glass-card stats-card">
+        <ion-card-header>
+          <ion-card-title>Sleep Stats</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-number">{{ averageSleep }}</div>
+              <div class="stat-label">Avg Sleep</div>
+            </div>
+
+            <div class="stat-box">
+              <div class="stat-number">{{ averageSleepiness }}</div>
+              <div class="stat-label">Avg Sleepiness</div>
+            </div>
+
+            <div class="stat-box">
+              <div class="stat-number">{{ totalLogs }}</div>
+              <div class="stat-label">Total Logs</div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Overnight Logs -->
       <ion-card class="glass-card">
         <ion-card-header>
           <ion-card-title>Overnight Logs</ion-card-title>
@@ -15,16 +44,25 @@
 
         <ion-card-content>
           <ion-list>
-            <ion-item *ngFor="let s of allOvernightData">
-              <ion-label>
-                <h3>{{ s.dateString() }}</h3>
-                <p>{{ s.summaryString() }}</p>
-              </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let s of allOvernightData; let i = index" #slidingItem>
+              <ion-item>
+                <ion-label>
+                  <h3>{{ s.dateString() }}</h3>
+                  <p>{{ s.summaryString() }}</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="confirmDeleteOvernight(s, slidingItem)">
+                  Delete
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
           </ion-list>
         </ion-card-content>
       </ion-card>
 
+      <!-- Sleepiness Logs -->
       <ion-card class="glass-card">
         <ion-card-header>
           <ion-card-title>Sleepiness Logs</ion-card-title>
@@ -32,16 +70,31 @@
 
         <ion-card-content>
           <ion-list>
-            <ion-item *ngFor="let s of allSleepinessData">
-              <ion-label>
-                <h3>{{ s.dateString() }}</h3>
-                <p>{{ s.summaryString() }}</p>
-              </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let s of allSleepinessData; let i = index" #slidingItem>
+              <ion-item>
+                <ion-label>
+                  <h3>{{ s.dateString() }}</h3>
+                  <p>{{ s.summaryString() }}</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="confirmDeleteSleepiness(s, slidingItem)">
+                  Delete
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
           </ion-list>
         </ion-card-content>
       </ion-card>
 
+      <!-- Clear All -->
+      <ion-button expand="block" color="danger" class="clear-all-btn" (click)="confirmClearAll()">
+        Clear All Data
+      </ion-button>
+
     </div>
+
   </ion-content>
+
 </div>

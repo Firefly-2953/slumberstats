@@ -39,7 +39,12 @@ export class SleepPage {
     return d.toISOString();
   })();
 
-  bedTimeISO: string = new Date().toISOString();
+  bedTimeISO: string = (() => {
+    const d = new Date();
+    d.setHours(d.getHours() - 8);
+      return d.toISOString();
+  })();
+
   wakeTimeISO: string = new Date().toISOString();
 
   //set time
