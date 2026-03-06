@@ -21,21 +21,25 @@ ion-toolbar {
 }
 
 ion-title {
-  color: #333;
+  font-family: "Story Script", cursive;
+  font-size: 1.9rem;
+  letter-spacing: 0.5px;
+  color: #184221;
   font-weight: 600;
 }
 
-/* Glass card */
+/* Both cards use this */
 .glass-card {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(8px);
   border-radius: 18px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  margin-bottom: 18px;
 }
 
 .glass-card ion-item {
   --background: transparent;
-  --color: #111;
+  --color: #010000;
 }
 
 .glass-card ion-card-title {
@@ -47,11 +51,64 @@ ion-modal {
   --width: 90%;
   --max-width: 400px;
   --border-radius: 16px;
+  --background: #1e1e1e;
 }
 
-ion-title {
-  font-family: "Story Script", cursive;
-  font-size: 1.9rem;
-  letter-spacing: 0.5px;
-  color: #184221;
+
+/* for fixing the weird shadow line */
+ion-datetime {
+  background: #1e1e1e !important;
+}
+
+ion-modal {
+  --height: auto;
+  --width: 90%;
+  --max-width: 400px;
+  --border-radius: 16px;
+  --background: #1e1e1e;
+}
+
+/* for fixing the weird shadow line for times */
+ion-datetime {
+  background: #1e1e1e !important;
+
+  /* taking away another weird shadow */
+  --wheel-fade-background-rgb: 30, 30, 30;
+  --wheel-highlight-background: rgba(255, 255, 255, 0.08);
+  --wheel-highlight-border-radius: 12px;
+}
+
+ion-datetime::part(wheel-item active) {
+  color: white;
+  font-weight: 600;
+}
+
+ion-datetime::part(wheel-item) {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.welcome-card {
+  background: rgba(255, 255, 255, 0.35); /* more transparent than the other cards */
+  backdrop-filter: blur(6px);
+  border-radius: 18px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.welcome-card h2 {
+  color: #111;
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.welcome-card p {
+  color: #111;
+  opacity: 0.8;
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+ion-modal {
+  --box-shadow: none;
 }

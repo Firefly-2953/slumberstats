@@ -1,0 +1,28 @@
+.sleep-page {
+  background-image: url('/assets/background/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+ion-content.sleep-bg {
+  --background: transparent;
+  background: url('/assets/background/bg.jpg') center/cover no-repeat;
+}
+
+ion-header {
+  background: transparent !important;
+}
+
+ion-toolbar {
+  --background: transparent !important;
+  --border-color: transparent !important;
+}
+
+ion-title {
+  font-family: "Story Script", cursive;
+  font-size: 1.9rem;
+  letter-spacing: 0.5px;
+  color: #184221;
+}

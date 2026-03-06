@@ -7,7 +7,7 @@ import {
   IonHeader, IonToolbar, IonTitle, IonContent,
   IonItem, IonLabel,
   IonButton,
-  IonDatetimeButton, IonModal, IonDatetime,
+  IonModal, IonDatetime,
   IonCard, IonCardHeader, IonCardTitle, IonCardContent,
 } from '@ionic/angular/standalone';
 
@@ -26,7 +26,7 @@ import { OvernightSleepData } from '../../data/overnight-sleep-data';
   IonItem, IonLabel,
   IonButton,
   IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-  IonDatetimeButton, IonModal, IonDatetime,
+  IonModal, IonDatetime,
 ],
 })
 export class SleepPage {
@@ -115,4 +115,37 @@ formatTime(value: string): string {
     const m = diffMin % 60;
     return `${h} hour${h === 1 ? '' : 's'}${m ? `, ${m} minute${m === 1 ? '' : 's'}` : ''}`;
   }
+
+  get lastOvernightEntry(): OvernightSleepData | null {
+  const data = SleepService.AllOvernightData;
+  if (!data || data.length === 0) return null;
+  return data[data.length - 1];
+}
+
+get lastNightSummary() {
+  const entry = this.lastOvernightEntry;
+  if (!entry) return null;
+
+  const start = entry.getSleepStart();
+  const end = entry.getSleepEnd();
+
+  return {
+    date: entry.dateString(),
+    duration: entry.summaryString(),
+    bedtime: start.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+    wakeTime: end.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+  };
+}
+
+get greeting(): string {
+  const hour = new Date().getHours();
+
+  if (hour < 12) {
+    return "Good morning, Emily ☀️";
+  } else if (hour < 18) {
+    return "Good afternoon, Emily 🌤️";
+  } else {
+    return "Good evening, Emily 🌙";
+  }
+}
 }

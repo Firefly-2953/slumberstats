@@ -1,29 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Logs</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="sleep-page">
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-title>SlumberStats</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content [fullscreen]="true" scrollY="true" class="ion-padding">
+  <ion-content class="ion-padding sleep-bg">
+    <div class="page">
 
-  <h2>Overnight Logs</h2>
-  <ion-list>
-    <ion-item *ngFor="let s of allOvernightData">
-      <ion-label>
-        <h3>{{ s.dateString() }}</h3>
-        <p>{{ s.summaryString() }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+      <ion-card class="glass-card">
+        <ion-card-header>
+          <ion-card-title>Overnight Logs</ion-card-title>
+        </ion-card-header>
 
-  <h2>Sleepiness Logs</h2>
-  <ion-list>
-    <ion-item *ngFor="let s of allSleepinessData">
-      <ion-label>
-        <h3>{{ s.dateString() }}</h3>
-        <p>{{ s.summaryString() }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let s of allOvernightData">
+              <ion-label>
+                <h3>{{ s.dateString() }}</h3>
+                <p>{{ s.summaryString() }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
 
-</ion-content>
+      <ion-card class="glass-card">
+        <ion-card-header>
+          <ion-card-title>Sleepiness Logs</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let s of allSleepinessData">
+              <ion-label>
+                <h3>{{ s.dateString() }}</h3>
+                <p>{{ s.summaryString() }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+  </ion-content>
+</div>

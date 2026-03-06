@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import {
   IonHeader, IonToolbar, IonTitle, IonContent,
-  IonList, IonItem, IonLabel
+  IonList, IonItem, IonLabel,
+  IonCard, IonCardHeader, IonCardTitle, IonCardContent
 } from '@ionic/angular/standalone';
 
 import { SleepService } from '../../services/sleep.service';
@@ -14,10 +15,11 @@ import { SleepService } from '../../services/sleep.service';
   styleUrls: ['logs.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    IonHeader, IonToolbar, IonTitle, IonContent,
-    IonList, IonItem, IonLabel
-  ],
+  CommonModule,
+  IonHeader, IonToolbar, IonTitle, IonContent,
+  IonList, IonItem, IonLabel,
+  IonCard, IonCardHeader, IonCardTitle, IonCardContent
+],
 })
 export class LogsPage {
   constructor(public sleepService: SleepService) {}

@@ -1,5 +1,4 @@
 <div class="sleep-page">
-
   <ion-header translucent="true">
     <ion-toolbar>
       <ion-title>SlumberStats</ion-title>
@@ -8,15 +7,19 @@
 
   <ion-content class="ion-padding sleep-bg">
     <div class="page">
-
+      <ion-card class="glass-card welcome-card">
+        <ion-card-content>
+          <h2>{{ greeting }}</h2>
+            <p>Ready to log another night of sleep?</p>
+        </ion-card-content>
+      </ion-card>
       <ion-card class="glass-card">
         <ion-card-header>
           <ion-card-title>Log Overnight Sleep</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-
-          <!-- Night of (date only) -->
+          <!-- Night of -->
           <ion-item lines="full">
             <ion-label>Night of</ion-label>
             <ion-button id="open-night" fill="clear" slot="end">
@@ -73,12 +76,34 @@
           <ion-button expand="block" (click)="addOvernightSleepFromTimes()">
             Save Overnight Sleep
           </ion-button>
-
         </ion-card-content>
       </ion-card>
 
+      <ion-card class="glass-card" *ngIf="lastNightSummary">
+        <ion-card-header>
+          <ion-card-title>Last Night's Sleep</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-label>
+              <h2>{{ lastNightSummary.date }}</h2>
+              <p>{{ lastNightSummary.duration }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="full">
+            <ion-label>Bedtime</ion-label>
+            <ion-label slot="end">{{ lastNightSummary.bedtime }}</ion-label>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Wake Time</ion-label>
+            <ion-label slot="end">{{ lastNightSummary.wakeTime }}</ion-label>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
     </div>
   </ion-content>
-
 </div>
 

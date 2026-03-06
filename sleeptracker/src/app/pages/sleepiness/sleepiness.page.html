@@ -1,57 +1,59 @@
+<div class="sleep-page">
+  <ion-header translucent="true">
+    <ion-toolbar>
+      <ion-title>SlumberStats</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Sleepiness</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-content class="ion-padding sleep-bg">
+    <div class="page">
+      <ion-card class="glass-card">
+        <ion-card-header>
+          <ion-card-title>Log Sleepiness</ion-card-title>
+        </ion-card-header>
 
-<ion-content class="ion-padding">
-  <div class="page">
+        <ion-card-content>
+          <!-- Sleepiness value -->
+          <ion-item lines="full">
+            <ion-label>How sleepy are you?</ion-label>
+            <ion-select slot="end" [(ngModel)]="sleepinessValue" interface="popover">
+              <ion-select-option *ngFor="let v of [1,2,3,4,5,6,7]" [value]="v">
+                {{ v }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Log Sleepiness</ion-card-title>
-      </ion-card-header>
+          <!-- Guide / explanation -->
+          <ion-item lines="none" class="sleepiness-guide">
+            <ion-label class="ion-text-wrap">
+              <div class="guide-number">{{ sleepinessValue }}</div>
+              <div class="guide-text">{{ sleepinessDescription }}</div>
+            </ion-label>
+          </ion-item>
 
-      <ion-card-content>
-        <!-- Sleepiness value -->
-        <ion-item lines="full">
-          <ion-label>How sleepy are you?</ion-label>
-          <ion-select slot="end" [(ngModel)]="sleepinessValue" interface="popover">
-            <ion-select-option *ngFor="let v of [1,2,3,4,5,6,7]" [value]="v">
-              {{ v }}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
+          <!-- Time -->
+          <ion-item lines="full">
+            <ion-label>Time</ion-label>
+            <ion-button id="open-sleepy-time" fill="clear" slot="end">
+              Pick
+            </ion-button>
+          </ion-item>
 
-        <!-- Guide / explanation -->
-        <ion-item lines="none" class="sleepiness-guide">
-          <ion-label class="ion-text-wrap">
-            <div class="guide-number">{{ sleepinessValue }}</div>
-            <div class="guide-text">{{ sleepinessDescription }}</div>
-          </ion-label>
-        </ion-item>
+          <ion-modal trigger="open-sleepy-time" [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                presentation="date-time"
+                showDefaultButtons="true"
+                [(ngModel)]="sleepinessTimeISO">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
 
-        <!-- Time -->
-        <ion-item lines="full">
-          <ion-label>Time</ion-label>
-          <ion-button id="open-sleepy-time" fill="clear" slot="end">Pick</ion-button>
-        </ion-item>
-
-        <ion-modal trigger="open-sleepy-time" [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              presentation="date-time"
-              [(ngModel)]="sleepinessTimeISO">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
-
-        <ion-button expand="block" (click)="addSleepinessLog()">
-          Save Sleepiness
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-
-  </div>
-</ion-content>
+          <ion-button expand="block" (click)="addSleepinessLog()">
+            Save Sleepiness
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+</div>
