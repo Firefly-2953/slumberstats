@@ -17,6 +17,7 @@ import { SleepService } from '../../services/sleep.service';
 import { OvernightSleepData } from '../../data/overnight-sleep-data';
 import { StanfordSleepinessData } from '../../data/stanford-sleepiness-data';
 
+//for my graphs
 Chart.register(...registerables);
 
 @Component({
@@ -38,6 +39,7 @@ export class LogsPage implements AfterViewInit {
   @ViewChild('sleepChartCanvas') sleepChartCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('sleepinessChartCanvas') sleepinessChartCanvas!: ElementRef<HTMLCanvasElement>;
 
+  // for graphs
   sleepChart: Chart | null = null;
   sleepinessChart: Chart | null = null;
   sleepinessChartDateLabel: string = '';
@@ -47,11 +49,13 @@ export class LogsPage implements AfterViewInit {
     private alertCtrl: AlertController
   ) {}
 
+  //for rendering teh charts
   ngAfterViewInit() {
     this.renderSleepChart();
     this.renderSleepinessChart();
   }
 
+  //for re rendering charts when entering that tab
   ionViewWillEnter() {
     this.renderSleepChart();
     this.renderSleepinessChart();
@@ -65,10 +69,12 @@ export class LogsPage implements AfterViewInit {
     return SleepService.AllSleepinessData;
   }
 
+  //total number of logs
   get totalLogs(): number {
     return this.allOvernightData.length + this.allSleepinessData.length;
   }
 
+  //calcualtes the average sleep
   get averageSleep(): string {
     if (this.allOvernightData.length === 0) return '--';
 
@@ -83,6 +89,7 @@ export class LogsPage implements AfterViewInit {
     return `${hours}h ${minutes}m`;
   }
 
+  // calculates the average sleepiness
   get averageSleepiness(): string {
     if (this.allSleepinessData.length === 0) return '--';
 
@@ -93,6 +100,7 @@ export class LogsPage implements AfterViewInit {
     return (total / this.allSleepinessData.length).toFixed(1);
   }
 
+  //check if theres any data to show
   get hasSleepinessChartData(): boolean {
     return this.getLatestSleepinessDayEntries().length > 0;
   }
@@ -169,7 +177,7 @@ export class LogsPage implements AfterViewInit {
       }
     });
   }
-
+  //for chart, only want to show recent days
   private getLatestSleepinessDayEntries(): StanfordSleepinessData[] {
     if (this.allSleepinessData.length === 0) return [];
 
@@ -285,7 +293,7 @@ export class LogsPage implements AfterViewInit {
       }
     });
   }
-
+  //for deleting logs, has a confirmation alert
   async confirmDeleteOvernight(entry: OvernightSleepData, slidingItem: IonItemSliding) {
     const alert = await this.alertCtrl.create({
       header: 'Delete log?',
@@ -365,7 +373,7 @@ export class LogsPage implements AfterViewInit {
 
     this.renderSleepinessChart();
   }
-
+  //clears all data with confirmation alert
   async confirmClearAll() {
     const alert = await this.alertCtrl.create({
       header: 'Clear all data?',

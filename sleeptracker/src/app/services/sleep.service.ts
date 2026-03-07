@@ -17,14 +17,13 @@ export class SleepService {
   public static AllSleepinessData:StanfordSleepinessData[] = [];
 
   constructor() {
-    // 1) Try to load saved data first
     const loaded = this.loadFromStorage();
 
-    // 2) If nothing saved yet, fall back to the starter fake data once
+    //if nothing is logged then use defaults
     if (!loaded && SleepService.LoadDefaultData) {
       this.addDefaultData();
       SleepService.LoadDefaultData = false;
-      this.saveToStorage(); // save the default data too
+      this.saveToStorage(); // save the default
     }
   }
 
@@ -63,7 +62,7 @@ export class SleepService {
     this.saveToStorage();
   }
 
-  // ===== LocalStorage save/load =====
+  // for saving and loading
 
   private saveToStorage() {
     const overnightToSave = SleepService.AllOvernightData.map(o => ({
@@ -124,7 +123,7 @@ export class SleepService {
     return true;
   }
 
-  // optional: handy for testing / demo if you want a reset button later
+  // made for later testing and implemnentation
   public clearAllData() {
     SleepService.AllSleepData = [];
     SleepService.AllOvernightData = [];

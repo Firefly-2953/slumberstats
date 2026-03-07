@@ -11,7 +11,7 @@ import {
 import { addIcons } from 'ionicons';
 import { moonOutline, bedOutline, listOutline } from 'ionicons/icons';
 
-/* icons for tabs */
+// icons for tabs 
 addIcons({
   moonOutline,
   bedOutline,
