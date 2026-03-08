@@ -4,10 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent,
-  IonItem, IonLabel,
-  IonButton,
-  IonModal, IonDatetime,
+  IonHeader, IonToolbar, IonTitle, IonContent,IonItem, IonLabel,IonButton,IonModal, IonDatetime,
   IonCard, IonCardHeader, IonCardTitle, IonCardContent,
 } from '@ionic/angular/standalone';
 
@@ -20,12 +17,8 @@ import { OvernightSleepData } from '../../data/overnight-sleep-data';
   styleUrls: ['sleep.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonHeader, IonToolbar, IonTitle, IonContent,
-    IonItem, IonLabel,
-    IonButton,
-    IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+    CommonModule,FormsModule,IonHeader, IonToolbar, IonTitle, IonContent,IonItem, 
+    IonLabel,IonButton,IonCard, IonCardHeader, IonCardTitle, IonCardContent,
     IonModal, IonDatetime,
   ],
 })
@@ -78,7 +71,7 @@ export class SleepPage {
     //error handling for future times
     if (start > now || end > now) {
       const futureAlert = await this.alertCtrl.create({
-        header: 'Future Entry Not Allowed',
+        header: 'Future Entries Not Allowed',
         message: 'Sleep logs cannot be entered in the future.',
         buttons: ['OK']
       });
@@ -89,7 +82,7 @@ export class SleepPage {
 
     const duration = this.durationString(start, end);
 
-    //confirms before saving
+    //confirms before saving, if edit is hit then it cancels and lets user change times
     const alert = await this.alertCtrl.create({
       header: 'Confirm sleep log',
       message: `You slept ${duration}. Is that correct?`,

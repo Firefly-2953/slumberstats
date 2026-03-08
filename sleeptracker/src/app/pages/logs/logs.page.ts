@@ -3,12 +3,9 @@ import { CommonModule } from '@angular/common';
 import { AlertController } from '@ionic/angular';
 
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent,
-  IonList, IonItem, IonLabel,
-  IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-  IonButton,
-  IonItemSliding, IonItemOptions, IonItemOption,
-  IonAccordion, IonAccordionGroup
+  IonHeader, IonToolbar, IonTitle, IonContent,IonList, IonItem, IonLabel,
+  IonCard, IonCardHeader, IonCardTitle, IonCardContent,IonButton,IonItemSliding,
+  IonItemOptions, IonItemOption,IonAccordion, IonAccordionGroup
 } from '@ionic/angular/standalone';
 
 import { Chart, registerables } from 'chart.js';
@@ -26,13 +23,9 @@ Chart.register(...registerables);
   styleUrls: ['logs.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    IonHeader, IonToolbar, IonTitle, IonContent,
-    IonList, IonItem, IonLabel,
-    IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-    IonButton,
-    IonItemSliding, IonItemOptions, IonItemOption,
-    IonAccordion, IonAccordionGroup
+    CommonModule,IonHeader, IonToolbar, IonTitle, IonContent,IonList, IonItem, IonLabel,
+    IonCard, IonCardHeader, IonCardTitle, IonCardContent,IonButton,IonItemSliding,
+    IonItemOptions, IonItemOption,IonAccordion, IonAccordionGroup
   ],
 })
 export class LogsPage implements AfterViewInit {
@@ -104,7 +97,7 @@ export class LogsPage implements AfterViewInit {
   get hasSleepinessChartData(): boolean {
     return this.getLatestSleepinessDayEntries().length > 0;
   }
-
+  //sleep chart for last 7 days
   private renderSleepChart() {
     if (!this.sleepChartCanvas?.nativeElement) return;
 
@@ -234,7 +227,7 @@ export class LogsPage implements AfterViewInit {
     if (this.sleepinessChart) {
       this.sleepinessChart.destroy();
     }
-
+    //graph for sleepiness, shows data throughout the day
     this.sleepinessChart = new Chart(this.sleepinessChartCanvas.nativeElement, {
       type: 'line',
       data: {
@@ -345,34 +338,17 @@ export class LogsPage implements AfterViewInit {
 
     await alert.present();
   }
-
+  //updated deletes since it wasnt saving them until an entry was logged,  now it will save
   deleteOvernight(entry: OvernightSleepData) {
-    const overnightIndex = SleepService.AllOvernightData.indexOf(entry);
-    if (overnightIndex > -1) {
-      SleepService.AllOvernightData.splice(overnightIndex, 1);
-    }
-
-    const allIndex = SleepService.AllSleepData.indexOf(entry);
-    if (allIndex > -1) {
-      SleepService.AllSleepData.splice(allIndex, 1);
-    }
-
-    this.renderSleepChart();
-  }
+  this.sleepService.deleteOvernightData(entry);
+  this.renderSleepChart();
+}
 
   deleteSleepiness(entry: StanfordSleepinessData) {
-    const sleepinessIndex = SleepService.AllSleepinessData.indexOf(entry);
-    if (sleepinessIndex > -1) {
-      SleepService.AllSleepinessData.splice(sleepinessIndex, 1);
-    }
-
-    const allIndex = SleepService.AllSleepData.indexOf(entry);
-    if (allIndex > -1) {
-      SleepService.AllSleepData.splice(allIndex, 1);
-    }
-
-    this.renderSleepinessChart();
+  this.sleepService.deleteSleepinessData(entry);
+  this.renderSleepinessChart();
   }
+
   //clears all data with confirmation alert
   async confirmClearAll() {
     const alert = await this.alertCtrl.create({

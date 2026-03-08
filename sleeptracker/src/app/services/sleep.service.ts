@@ -62,6 +62,35 @@ export class SleepService {
     this.saveToStorage();
   }
 
+  // updated my deletes so it would save when deleting, and not only when adding
+  public deleteOvernightData(sleepData:OvernightSleepData) {
+    const overnightIndex = SleepService.AllOvernightData.indexOf(sleepData);
+    if (overnightIndex > -1) {
+      SleepService.AllOvernightData.splice(overnightIndex, 1);
+    }
+
+    const allIndex = SleepService.AllSleepData.indexOf(sleepData);
+    if (allIndex > -1) {
+      SleepService.AllSleepData.splice(allIndex, 1);
+    }
+
+    this.saveToStorage();
+  }
+
+  public deleteSleepinessData(sleepData:StanfordSleepinessData) {
+    const sleepinessIndex = SleepService.AllSleepinessData.indexOf(sleepData);
+    if (sleepinessIndex > -1) {
+      SleepService.AllSleepinessData.splice(sleepinessIndex, 1);
+    }
+
+    const allIndex = SleepService.AllSleepData.indexOf(sleepData);
+    if (allIndex > -1) {
+      SleepService.AllSleepData.splice(allIndex, 1);
+    }
+
+    this.saveToStorage();
+  }
+
   // for saving and loading
 
   private saveToStorage() {
@@ -90,6 +119,7 @@ export class SleepService {
     SleepService.AllOvernightData = [];
     SleepService.AllSleepinessData = [];
 
+    //catchs errors for sleepiness and overnight
     if (overnightRaw) {
       try {
         const overnightArr: { sleepStart: string; sleepEnd: string }[] = JSON.parse(overnightRaw);

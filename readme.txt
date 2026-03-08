@@ -20,7 +20,7 @@
  5 hours - getting sleep set up (endless amount of bugs)
  2 hours - sleepiness
  7 hours - logs, researching how to implement all the stuff i wanted to do (graphs)
- 2 hours - readme and finishing touches
+ 2 hours - readme and fixing my localstorage so it actually saves after delete
  
 
 
@@ -29,6 +29,7 @@ https://ionicframework.com/docs/api/datetime-button
 https://angular.dev/guide/components
 https://www.geeksforgeeks.org/angular-js/standalone-components-in-angular/
 https://ionicframework.com/docs/angular/overview
+https://www.w3schools.com/jsref/jsref_tolocaledatestring.asp
 https://ionicframework.com/docs/components
 https://www.chartjs.org/docs/
 https://www.freecodecamp.org/news/how-to-make-bar-and-line-charts-using-chartjs-in-angular/
@@ -37,8 +38,10 @@ https://www.freecodecamp.org/news/angular-lifecycle-hooks/
 https://ionicframework.com/docs/angular/alerts
 https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 https://www.typescriptlang.org/docs/
-
-
+https://stackoverflow.com/questions/63960901/update-the-ion-item-after-each-delete-in-ionic-app
+https://ionicstart.com/modules/ionic-vs-angular/4/
+https://www.ag-grid.com/charts/angular/quick-start/
+chatgbt - helped me fix my graphs (im bad at them)
 
 
 
@@ -49,6 +52,8 @@ https://www.typescriptlang.org/docs/
 
 5. Is there anything special we need to know in order to run your code?
     All it needs is npm start and ionic serve.
+    I stated it already in my demo but if you want the UI to look like the video then you have to refresh
+    the tab (not sure if its just my computer or ionic). Either way all the code works, its just a visuals thing.
 
 
 --Aim for no more than two sentences for each of the following questions.--
@@ -73,13 +78,13 @@ https://www.typescriptlang.org/docs/
     I chose this so that it was simple to log, and you can easily see what the number means when you select this.
 
 10. How can a person view the data they logged in your app? Why did you choose to support viewing logged data in this way?
-A person can view their logged data by going to the logs tab, where all entries are displayed and individual logs can be deleted 
-by swiping them. I chose this so that you can easily review your data and quickly remove any incorrect entries.    
+    A person can view their logged data by going to the logs tab, where all entries are displayed and individual logs can be deleted 
+    by swiping them. I chose this so that you can easily review your data and quickly remove any incorrect entries.    
 
 
 11. Which feature choose--using a native device resource, backing up logged data, or both?
     Backing up logged data locally. The stores the sleep and sleepiness logs locally so that 
-    users can easily look at old data.
+    users can easily look at old data (and updates the save when a delete is called).
 
 
 12. If you used a native device resource, what feature did you add? How does this feature change the app's experience for a user?

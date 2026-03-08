@@ -4,12 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent,
-  IonItem, IonLabel,
-  IonButton,
-  IonModal, IonDatetime,
-  IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-  IonSelect, IonSelectOption
+  IonHeader, IonToolbar, IonTitle, IonContent,IonItem, IonLabel,IonButton,IonModal, 
+  IonDatetime,IonCard, IonCardHeader, IonCardTitle, IonCardContent,IonSelect, IonSelectOption
 } from '@ionic/angular/standalone';
 
 import { SleepService } from '../../services/sleep.service';
@@ -21,14 +17,9 @@ import { StanfordSleepinessData } from '../../data/stanford-sleepiness-data';
   styleUrls: ['sleepiness.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    IonHeader, IonToolbar, IonTitle, IonContent,
-    IonItem, IonLabel,
-    IonButton,
-    IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-    IonModal, IonDatetime,
-    IonSelect, IonSelectOption
+    CommonModule,FormsModule,IonHeader, IonToolbar, IonTitle, IonContent,IonItem, 
+    IonLabel,IonButton,IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+    IonModal, IonDatetime,IonSelect, IonSelectOption
   ],
 })
 export class SleepinessPage {
@@ -123,10 +114,10 @@ export class SleepinessPage {
 
   //for the last check-in, shows time in a time ago format
   timeAgo(date: Date): string {
-    const diff = Math.floor((Date.now() - date.getTime()) / 1000);
+    const timeDiff = Math.floor((Date.now() - date.getTime()) / 1000);
 
-    const minutes = Math.floor(diff / 60);
-    const hours = Math.floor(diff / 3600);
+    const minutes = Math.floor(timeDiff / 60);
+    const hours = Math.floor(timeDiff / 3600);
 
     if (minutes < 1) return 'just now';
     if (minutes < 60) return `${minutes} min ago`;
