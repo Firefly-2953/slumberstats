@@ -1,6 +1,8 @@
 # SlumberStats
 
-SlumberStats is a mobile sleep tracking application built with Ionic and Angular. Users can log overnight sleep, track daytime sleepiness using the Stanford Sleepiness Scale, visualize trends through interactive charts, and persist data locally using browser storage.
+SlumberStats is a mobile sleep tracking application built with Ionic and Angular. 
+Users can log overnight sleep, track daytime sleepiness using the Stanford Sleepiness Scale, 
+visualize trends through interactive charts, and persist data locally using browser storage.
 
 ## Features
 
