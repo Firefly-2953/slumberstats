@@ -26,6 +26,21 @@ SlumberStats is a mobile sleep tracking application built with Ionic and Angular
 ## Screenshots
 
 
+### Home Page
+![Home Page](screenshots/home_page.png)
+
+### Sleepiness Logging
+![Sleepiness Logging](screenshots/log_sleepiness.png)
+
+### Sleep Statistics Graph
+![Sleep Statistics](screenshots/sleep_stats_graph.png)
+
+### Sleepiness Trend Graph
+![Sleepiness Trend](screenshots/sleepiness_trend.png)
+
+### Swipe-to-Delete Logs
+![Delete Logs](screenshots/log_delete.png)
+
 
 ## Running the Project
 
